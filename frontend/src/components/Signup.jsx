@@ -62,28 +62,10 @@ const Signup = ({ onSignupSuccess = null }) => {
     );
 
     if (res.data.success) {
-      // Save JWT token
-      localStorage.setItem("authToken", res.data.token);
+  alert("Registration Successful! Please Login.");
 
-      // Save user
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify(res.data.user)
-      );
-
-      // Notify Navbar
-      window.dispatchEvent(
-        new CustomEvent("authChanged", {
-          detail: { user: res.data.user },
-        })
-      );
-
-      if (typeof onSignupSuccess === "function") {
-        onSignupSuccess(res.data.user);
-      }
-
-      navigate("/", { replace: true });
-    }
+  navigate("/login");
+}
   } catch (err) {
     setSubmitError(
       err.response?.data?.message || "Signup failed"

@@ -54,25 +54,23 @@ const Login = ({ onLoginSuccess = null }) => {
       });
 
       if (res.data.success) {
-        localStorage.setItem("authToken", res.data.token);
+  localStorage.setItem("authToken", res.data.token);
 
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify(res.data.user)
-        );
+  localStorage.setItem(
+    "currentUser",
+    JSON.stringify(res.data.user)
+  );
 
-        window.dispatchEvent(
-          new CustomEvent("authChanged", {
-            detail: { user: res.data.user },
-          })
-        );
+  window.dispatchEvent(
+    new CustomEvent("authChanged", {
+      detail: { user: res.data.user },
+    })
+  );
 
-        if (typeof onLoginSuccess === "function") {
-          onLoginSuccess(res.data.user);
-        }
+  alert("Login Successful!");
 
-        navigate("/", { replace: true });
-      }
+  navigate("/");
+}
     } catch (err) {
       setSubmitError(
         err.response?.data?.message || "Login failed"
